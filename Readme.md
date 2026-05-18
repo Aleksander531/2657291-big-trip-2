@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Александр Волков](https://up.htmlacademy.ru/ecmascript-individual/2/user/2657291).
-* Наставник: `Неизвестно`.
+* Наставник: [Виктория Никитина](https://htmlacademy.ru/profile/id1217273).
 
 ---
 
