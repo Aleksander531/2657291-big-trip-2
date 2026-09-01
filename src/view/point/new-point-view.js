@@ -4,7 +4,7 @@ import { getDefaultDateFrom, getDefaultDateTo } from '../../common/utils.js';
 export default class NewPointView extends FormEditView {
   constructor({ destinations, allOffers, onSave, onClose }) {
     const defaultPoint = {
-      id: null,
+      //id: null,
       type: 'flight',
       destination: '',
       dateFrom: getDefaultDateFrom(),
