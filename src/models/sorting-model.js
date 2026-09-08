@@ -1,5 +1,5 @@
 import Observable from '../framework/observable';
-import { DEFAULT_SORTING, UpdateType } from '../const';
+import { DEFAULT_SORTING } from '../const';
 
 export default class SortingModel extends Observable {
   #currentSorting = DEFAULT_SORTING;

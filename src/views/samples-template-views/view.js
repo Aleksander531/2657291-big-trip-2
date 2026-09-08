@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
 function createTemplate() {
-  return ``;
+  return '';
 }
 
 export default class View extends AbstractView {

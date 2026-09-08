@@ -55,7 +55,7 @@ export const SortTypeDescriptions = {
   }
 };
 
-export const DEFAULT_SORTING = SortType.DAY
+export const DEFAULT_SORTING = SortType.DAY;
 
 const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',

@@ -1,4 +1,3 @@
-import { SortTypeDescriptions } from '../const.js';
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 
 function createTemplate(sorting) {

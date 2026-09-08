@@ -1,7 +1,7 @@
 import AbstractStatefulView from '../../framework/view/abstract-stateful-view.js';
 
 function createTemplate() {
-  return ``;
+  return '';
 }
 
 export default class View extends AbstractStatefulView {
