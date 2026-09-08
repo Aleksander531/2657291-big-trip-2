@@ -76,7 +76,6 @@ export default class CreatePointPresenter {
       await this.#pointsModel.addPoint(pointData);
       this.#appModel.closeForm();
     } catch (error) {
-      console.error('Ошибка при создании:', error);
       this.#formView.resetButtons();
       this.#formView.shake();
     } finally {

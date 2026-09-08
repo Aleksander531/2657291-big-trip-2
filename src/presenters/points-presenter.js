@@ -3,7 +3,6 @@ import { remove, render } from '../framework/render';
 import { getFilteredPoints } from '../utils/filter-points';
 import { getSortingPoints } from '../utils/sorting-points';
 import EmptyView from '../views/empty-view';
-import PointListView from '../views/point-list-view';
 import PointPresenter from './point-presenter';
 import LoadingView from '../views/loading-view';
 
