@@ -1,18 +1,9 @@
-//import { mockRoutePoint } from '../mock/points';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-//import { nanoid } from 'nanoid';
 
 dayjs.extend(duration);
 
-export const isEscape = ({ key }) => key === 'Escape';
-
 const DATE_FORMAT = 'D MMMM';
-
-/*export const getRandomNumber = () => {
-  const randomIndex = Math.floor(Math.random() * mockRoutePoint.length);
-  return mockRoutePoint[randomIndex];
-};*/
 
 export const humanizeTaskDueData = (dueData) => dueData ? dayjs(dueData).format(DATE_FORMAT) : '';
 
@@ -30,6 +21,8 @@ export const formatDate = (date, format) => {
       return dayjs(date).format('YYYY-MM-DD');
     case 'custom':
       return dayjs(date).format('MMM DD').toUpperCase();
+    case 'day-month':
+      return dayjs(date).format('D MMM').toUpperCase();
     default:
       return dayjs(date).format('MMM DD');
   }
@@ -74,13 +67,6 @@ export function formatDateForInput(date) {
   return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
-/*export function getRandomPoint() {
-  return {
-    id: nanoid(),
-    ...getRandomNumber(mockRoutePoint)
-  };
-}*/
-
 export function isDatesEqual(dateA, dateB) {
   if (dateA === null && dateB === null) {
     return true;
@@ -95,11 +81,4 @@ export const getDefaultDateFrom = () => new Date().toISOString();
 export const getDefaultDateTo = () => new Date(Date.now() + 3600000)
   .toISOString();
 
-export function shake(element, callback) {
-  element.classList.add('shake');
-
-  setTimeout(() => {
-    element.classList.remove('shake');
-    callback?.();
-  }, 600);
-}
+export const formatTripDate = (date) => dayjs(date).format('D MMM').toUpperCase();

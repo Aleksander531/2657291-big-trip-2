@@ -8,19 +8,29 @@ const messages = {
   [FilterType.PAST]: 'There are no past events now',
 };
 
-function createEmptyTemplate(filterType) {
-  return `<p class="trip-events__msg">${messages[filterType] || messages[FilterType.EVERYTHING]}</p>`;
+function createTemplate(filterType, isError) {
+  if (isError) {
+    return '<p class="trip-events__msg">Failed to load latest route information</p>';
+  }
+
+  return `
+    <p class="trip-events__msg">
+      ${messages[filterType] || messages[FilterType.EVERYTHING]}
+    </p>
+  `;
 }
 
 export default class EmptyView extends AbstractView {
   #filterType = null;
+  #isError = false;
 
-  constructor({ filterType }) {
+  constructor({ filterType, isError = false }) {
     super();
     this.#filterType = filterType;
+    this.#isError = isError;
   }
 
   get template() {
-    return createEmptyTemplate(this.#filterType);
+    return createTemplate(this.#filterType, this.#isError);
   }
 }

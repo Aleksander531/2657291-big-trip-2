@@ -1,3 +1,20 @@
+export const AUTHORIZATION = `Basic ${crypto.randomUUID()}`;
+export const SERVER = 'https://22.objects.htmlacademy.pro/big-trip';
+
+export const Method = {
+  GET: 'GET',
+  PUT: 'PUT',
+  POST: 'POST',
+  DELETE: 'DELETE',
+};
+
+export const EndPoints = {
+  POINTS: 'points',
+  OFFERS: 'offers',
+  DESTINATIONS: 'destinations',
+  POINT: 'points/:id'
+};
+
 const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
@@ -5,11 +22,40 @@ const FilterType = {
   PAST: 'past',
 };
 
+export const DEFAULT_FILTER = FilterType.EVERYTHING;
+
 const SortType = {
   DAY: 'day',
-  PRICE: 'price',
+  EVENT: 'event',
   TIME: 'time',
+  PRICE: 'price',
+  OFFERS: 'offers'
 };
+
+export const SortTypeDescriptions = {
+  [SortType.DAY]: {
+    isDisabled: false,
+    name: 'Day',
+  },
+  [SortType.EVENT]: {
+    isDisabled: true,
+    name: 'Event',
+  },
+  [SortType.TIME]: {
+    isDisabled: false,
+    name: 'Time',
+  },
+  [SortType.PRICE]: {
+    isDisabled: false,
+    name: 'Price',
+  },
+  [SortType.OFFERS]: {
+    isDisabled: true,
+    name: 'Offers',
+  }
+};
+
+export const DEFAULT_SORTING = SortType.DAY
 
 const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',
