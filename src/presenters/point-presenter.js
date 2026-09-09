@@ -42,21 +42,39 @@ export default class PointPresenter {
   init() {
     this.#pointView = new PointView({
       point: this.#getPointData(this.#point),
-      onFavoriteChange: this.handleFavoriteChange,
-      onOpenForm: this.handleOpenForm,
+      onFavoriteChange: this.#handleFavoriteChange,
+      onOpenForm: this.#handleOpenForm,
     });
 
     this.#formView = new FormView({
       point: this.#point,
       destinations: this.#destinationModel.destinations,
       availableOffers: this.#offersModel.getOffersByType(this.#point.type),
-      onTypeChange: this.handleTypeChange,
-      onCloseForm: this.handleCloseForm,
-      onSubmit: this.handleSubmit,
-      onDelete: this.handleDelete,
+      onTypeChange: this.#handleTypeChange,
+      onCloseForm: this.#handleCloseForm,
+      onSubmit: this.#handleSubmit,
+      onDelete: this.#handleDelete,
     });
 
     render(this.#pointView, this.#pointListView.element);
+  }
+
+  updatePoint() {
+    this.#point = this.#pointsModel.getPointById(this.#point.id);
+    this.#pointView.updateElement({ point: this.#getPointData(this.#point) });
+  }
+
+  destroy() {
+    remove(this.#pointView);
+    remove(this.#formView);
+  }
+
+  openForm() {
+    replace(this.#formView, this.#pointView);
+  }
+
+  closeForm() {
+    replace(this.#pointView, this.#formView);
   }
 
   #getPointData(point) {
@@ -71,44 +89,30 @@ export default class PointPresenter {
     });
   }
 
-  handleFavoriteChange = async () => {
+  #handleFavoriteChange = async () => {
+    this.#uiBlocker.block();
     try {
       await this.#pointsModel.changePointFavorite(this.#point.id);
     } catch (error) {
       this.#pointView.shake();
+    } finally {
+      this.#uiBlocker.unblock();
     }
   };
 
-  updatePoint() {
-    this.#point = this.#pointsModel.getPointById(this.#point.id);
-    this.#pointView.updateElement({ point: this.#getPointData(this.#point) });
-  }
-
-  destroy() {
-    remove(this.#pointView);
-    remove(this.#formView);
-  }
-
-  handleOpenForm = () => {
+  #handleOpenForm = () => {
     this.#onOpenForm(this.#point.id);
   };
 
-  handleCloseForm = () => {
+  #handleCloseForm = () => {
     this.#onCloseForm();
   };
 
-  openForm = () => {
-    replace(this.#formView, this.#pointView);
-  };
-
-  closeForm = () => {
-    replace(this.#pointView, this.#formView);
-  };
-
-  handleSubmit = async (pointData) => {
+  #handleSubmit = async (pointData) => {
     this.#uiBlocker.block();
     try {
       await this.#pointsModel.updatePoint(pointData);
+      this.#onCloseForm();
     } catch (error) {
       this.#formView.resetButtons();
       this.#formView.shake();
@@ -117,7 +121,7 @@ export default class PointPresenter {
     }
   };
 
-  handleDelete = async (id) => {
+  #handleDelete = async (id) => {
     this.#uiBlocker.block();
     try {
       await this.#pointsModel.deletePoint(id);
@@ -129,5 +133,5 @@ export default class PointPresenter {
     }
   };
 
-  handleTypeChange = (type) => this.#offersModel.getOffersByType(type);
+  #handleTypeChange = (type) => this.#offersModel.getOffersByType(type);
 }
