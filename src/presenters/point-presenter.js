@@ -16,6 +16,7 @@ export default class PointPresenter {
   #onOpenForm;
   #onCloseForm;
   #uiBlocker;
+  #isFormOpen = false;
 
   constructor({
     point,
@@ -67,14 +68,25 @@ export default class PointPresenter {
   destroy() {
     remove(this.#pointView);
     remove(this.#formView);
+    this.#isFormOpen = false;
   }
 
   openForm() {
+    if (this.#isFormOpen) {
+      return;
+    }
+
     replace(this.#formView, this.#pointView);
+    this.#isFormOpen = true;
   }
 
   closeForm() {
+    if (!this.#isFormOpen) {
+      return;
+    }
+
     replace(this.#pointView, this.#formView);
+    this.#isFormOpen = false;
   }
 
   #getPointData(point) {
